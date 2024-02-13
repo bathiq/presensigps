@@ -64,18 +64,18 @@ Route::middleware(['auth:user'])->group(function(){
     Route::get('/panel/dashboardadmin',[DashboardController::class, 'dashboardadmin']);
     
     //Karyawan
-    Route::get('/panel/karyawan',[KaryawanController::class, 'index']);
-    Route::post('/panel/karyawan/store',[KaryawanController::class, 'store']);
-    Route::post('/panel/karyawan/edit',[KaryawanController::class, 'edit']);
-    Route::post('/panel/karyawan/{nik}/update',[KaryawanController::class, 'update']);
-    Route::post('/panel/karyawan/{nik}/delete',[KaryawanController::class, 'delete']);
+    Route::get('karyawan',[KaryawanController::class, 'index']);
+    Route::post('/karyawan/store',[KaryawanController::class, 'store']);
+    Route::post('/karyawan/edit',[KaryawanController::class, 'edit']);
+    Route::post('/karyawan/{nik}/update',[KaryawanController::class, 'update']);
+    Route::post('/karyawan/{nik}/delete',[KaryawanController::class, 'delete']);
 
     //Departemen
-    Route::get('/panel/department',[DepartmentController::class, 'index']);
-    Route::post('/panel/department/store',[DepartmentController::class, 'store']);
-    Route::post('/panel/department/edit',[DepartmentController::class, 'edit']);
-    Route::post('/panel/department/{dept_code}/update',[DepartmentController::class, 'update']);
-    Route::post('/panel/department/{dept_code}/delete',[DepartmentController::class, 'delete']);
+    Route::get('/department',[DepartmentController::class, 'index']);
+    Route::post('/department/store',[DepartmentController::class, 'store']);
+    Route::post('/department/edit',[DepartmentController::class, 'edit']);
+    Route::post('/department/{dept_code}/update',[DepartmentController::class, 'update']);
+    Route::post('/department/{dept_code}/delete',[DepartmentController::class, 'delete']);
 
     //Presensi
     Route::get('/panel/presensi/monitoring', [PresensiController::class, 'monitoring']);
@@ -92,4 +92,5 @@ Route::middleware(['auth:user'])->group(function(){
     //Konfigurasi
     Route::get('/panel/konfigurasi/lokasi_kantor', [KonfigurasiController::class, 'lokasi_kantor']);
     Route::post('/panel/konfigurasi/update_lokasi_kantor', [KonfigurasiController::class, 'update_lokasi_kantor']);
+    Route::get('/panel/konfigurasi/jam_kerja', [KonfigurasiController::class, 'jam_kerja']);
 });

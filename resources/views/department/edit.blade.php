@@ -1,4 +1,4 @@
-<form action="/panel/department/{{ $department->dept_code }}/update" method="POST" id="formDepartment">
+<form action="/department/{{ $department->dept_code }}/update" method="POST" id="formDepartment">
     @csrf
     <div class="row">
         <div class="col-12">

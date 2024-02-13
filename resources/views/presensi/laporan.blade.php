@@ -21,7 +21,7 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/panel/presensi/cetak_laporan" target="_blank" method="POST">
+                        <form action="/panel/presensi/cetak_laporan" id="formLaporan" target="_blank" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -89,3 +89,45 @@
     </div>
 </div>
 @endsection
+@push('myscript')
+<script>
+    $(function(){
+        $('#formLaporan').submit(function(e){
+            var month = $('#mont').val();
+            var year = $('#year').val();
+            var nik = $('#nik').val();
+            if(month == ""){
+                swal.fire({
+                    title : 'Warning!',
+                    text: 'Bulan Harus Dipilih!!',
+                    icon : 'warning',
+                    confirmButtonText:'OK'
+                }).then((result) => {
+                    $('#month').focus();
+                });
+                return false;
+            }else if(year == ""){
+                swal.fire({
+                    title : 'Warning!',
+                    text: 'Tahun Harus Dipilih!!',
+                    icon : 'warning',
+                    confirmButtonText:'OK'
+                }).then((result) => {
+                    $('#year').focus();
+                });
+                return false;
+            }else if(nik == ""){
+                swal.fire({
+                    title : 'Warning!',
+                    text: 'Karyawan Harus Dipilih!!',
+                    icon : 'warning',
+                    confirmButtonText:'OK'
+                }).then((result) => {
+                    $('#nik').focus();
+                });
+                return false;
+            }
+        });
+    });
+</script>
+@endpush

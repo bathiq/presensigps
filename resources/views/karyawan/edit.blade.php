@@ -1,4 +1,4 @@
-<form action="/panel/karyawan/{{ $karyawan->nik }}/update" method="POST" id="formEmployee" enctype="multipart/form-data">
+<form action="/karyawan/{{ $karyawan->nik }}/update" method="POST" id="formEmployee" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-12">

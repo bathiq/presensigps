@@ -30,4 +30,9 @@ class KonfigurasiController extends Controller
             return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
         }
     }
+
+    public function jam_kerja()
+    {
+        return view('konfigurasi.jam_kerja');
+    }
 }
