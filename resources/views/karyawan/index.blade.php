@@ -88,6 +88,7 @@
                                             <th>No. HP</th>
                                             <th>Foto</th>
                                             <th>Departemen</th>
+                                            <th>Cabang</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -110,6 +111,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ $val->dept_name }}</td>
+                                                <td>{{ $val->branch_code }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <a href="#" class="edit" nik="{{ $val->nik }}">
@@ -198,7 +200,17 @@
                             <select name="dept_code" id="dept_code" class="form-select">
                                 <option value="">Departemen</option>
                                 @foreach ($department as $val)
-                                    <option {{ Request('dept_code') == $val->dept_code ? 'selected' : '' }} value="{{ $val->dept_code }}">{{ $val->dept_name }}</option>
+                                    <option value="{{ $val->dept_code }}">{{ $val->dept_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <select name="branch_code" id="branch_code" class="form-select">
+                                <option value="">Cabang</option>
+                                @foreach ($branch as $val)
+                                    <option value="{{ $val->branch_code }}">{{ strtoupper($val->branch_name) }}</option>
                                 @endforeach
                             </select>
                         </div>

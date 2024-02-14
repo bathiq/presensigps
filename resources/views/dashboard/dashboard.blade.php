@@ -31,6 +31,7 @@
         <div id="user-info">
             <h2 id="user-name">{{ Auth::guard('karyawan')->user()->nama_lengkap }}</h2>
             <span id="user-role">{{ Auth::guard('karyawan')->user()->jabatan }}</span>
+            <span id="user-role">({{ Auth::guard('karyawan')->user()->branch_code }})</span>
         </div>
     </div>
 </div>

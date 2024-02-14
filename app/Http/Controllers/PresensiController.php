@@ -17,14 +17,19 @@ class PresensiController extends Controller
         $hari_ini = date('Y-m-d');
         $nik = Auth::guard('karyawan')->user()->nik;
         $cek = DB::table('presensis')->where('tanggal_presensi', $hari_ini)->where('nik',$nik)->count(); 
-        $lok_kantor = DB::table('konfigurasi_lokasis')->where('id',1)->first();
+        // $lok_kantor = DB::table('konfigurasi_lokasis')->where('id',1)->first();
+        $kode_cabang = Auth::guard('karyawan')->user()->branch_code;
+        $lok_kantor = DB::table('cabangs')->where('branch_code', $kode_cabang)->first();
         return view('presensi.create', compact('cek', 'lok_kantor'));
     }
 
     public function store(Request $request)
     {
-        $lok_kantor = DB::table('konfigurasi_lokasis')->where('id',1)->first();
-        $lok = explode(",", $lok_kantor->lokasi_kantor);
+        // $lok_kantor = DB::table('konfigurasi_lokasis')->where('id',1)->first();
+        $kode_cabang = Auth::guard('karyawan')->user()->branch_code;
+        $lok_kantor = DB::table('cabangs')->where('branch_code',$kode_cabang)->first();
+        // $lok = explode(",", $lok_kantor->lokasi_kantor);
+        $lok = explode(",", $lok_kantor->location_office);
         $latitude_company = $lok[0];
         $longitude_company = $lok[1];
         $nik = Auth::guard('karyawan')->user()->nik;
