@@ -6,6 +6,7 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KonfigurasiController;
+use App\Http\Controllers\CabangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,6 +89,13 @@ Route::middleware(['auth:user'])->group(function(){
     Route::get('/panel/presensi/izinsakit', [PresensiController::class, 'izinsakit']);
     Route::post('/panel/presensi/approved_izinsakit', [PresensiController::class, 'approved_izinsakit']);
     Route::get('/panel/presensi/{id}/batalkan_izinsakit', [PresensiController::class, 'batalkan_izinsakit']);
+
+    //Kantor Cabang
+    Route::get('panel/cabang',[CabangController::class, 'index']);
+    Route::post('panel/cabang/store',[CabangController::class, 'store']);
+    Route::post('panel/cabang/edit',[CabangController::class, 'edit']);
+    Route::post('panel/cabang/{branch_code}/update',[CabangController::class, 'update']);
+    Route::post('panel/cabang/{branch_code}/delete',[CabangController::class, 'delete']);
 
     //Konfigurasi
     Route::get('/panel/konfigurasi/lokasi_kantor', [KonfigurasiController::class, 'lokasi_kantor']);
