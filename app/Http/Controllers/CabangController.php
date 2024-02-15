@@ -29,7 +29,7 @@ class CabangController extends Controller
             ];
             DB::table('cabangs')->insert($data);
             return Redirect::back()->with(['success' => 'Data Cabang Berhasil Disimpan']);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return Redirect::back()->with(['warning' => 'Data Cabang Gagal Disimpan']);
         }
     }
@@ -55,7 +55,7 @@ class CabangController extends Controller
             ];
             DB::table('cabangs')->where('branch_code', $kode_cabang)->update($data);
             return Redirect::back()->with(['success' => 'Data Cabang Berhasil Diupdate']);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return Redirect::back()->with(['warning' => 'Data Cabang Gagal Diupdate']);
         }
     }

@@ -100,5 +100,10 @@ Route::middleware(['auth:user'])->group(function(){
     //Konfigurasi
     Route::get('/panel/konfigurasi/lokasi_kantor', [KonfigurasiController::class, 'lokasi_kantor']);
     Route::post('/panel/konfigurasi/update_lokasi_kantor', [KonfigurasiController::class, 'update_lokasi_kantor']);
+
     Route::get('/panel/konfigurasi/jam_kerja', [KonfigurasiController::class, 'jam_kerja']);
+    Route::post('/panel/konfigurasi/store_working_hours', [KonfigurasiController::class, 'store_working_hours']);
+    Route::post('/panel/konfigurasi/edit_working_hours', [KonfigurasiController::class, 'edit_working_hours']);
+    Route::post('/panel/konfigurasi/{kode_jam_kerja}/update_working_hours', [KonfigurasiController::class, 'update_working_hours']);
+    Route::post('/panel/konfigurasi/{kode_jam_kerja}/delete', [KonfigurasiController::class, 'delete_working_hours']);
 });
