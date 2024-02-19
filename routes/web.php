@@ -107,4 +107,6 @@ Route::middleware(['auth:user'])->group(function(){
     Route::post('/panel/konfigurasi/{kode_jam_kerja}/update_working_hours', [KonfigurasiController::class, 'update_working_hours']);
     Route::post('/panel/konfigurasi/{kode_jam_kerja}/delete', [KonfigurasiController::class, 'delete_working_hours']);
     Route::get('/panel/konfigurasi/{nik}/set_jam_kerja', [KonfigurasiController::class, 'set_jam_kerja']);
+    Route::post('/panel/konfigurasi/store_set_jam_kerja', [KonfigurasiController::class, 'store_set_jam_kerja']);
+    Route::post('/panel/konfigurasi/update_set_jam_kerja', [KonfigurasiController::class, 'update_set_jam_kerja']);
 });

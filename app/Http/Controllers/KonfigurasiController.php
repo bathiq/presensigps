@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\KonfigurasiJamKerja;
 
 class KonfigurasiController extends Controller
 {
@@ -103,10 +104,62 @@ class KonfigurasiController extends Controller
         }
     }
 
-    public function set_jam_kerja($nik, Request $request)
+    public function set_jam_kerja($nik)
     {
         $karyawan = DB::table('karyawans')->where('nik', $nik)->first();
         $jam_kerja = DB::table('jam_kerjas')->orderBy('nama_jam_kerja')->get();
-        return view('konfigurasi.set_jam_kerja', compact('karyawan', 'jam_kerja'));
+        $cek_jam_kerja = DB::table('konfigurasi_jam_kerjas')->where('nik', $nik)->count();
+        if ($cek_jam_kerja > 0) {
+            $set_jam_kerja = DB::table('konfigurasi_jam_kerjas')->where('nik', $nik)->get();
+            return view('konfigurasi.edit_set_jam_kerja', compact('karyawan', 'jam_kerja', 'set_jam_kerja'));
+        }else{
+            return view('konfigurasi.set_jam_kerja', compact('karyawan', 'jam_kerja'));
+        }
+    }
+
+    public function store_set_jam_kerja(Request $request)
+    {
+        $nik = $request->nik;
+        $hari = $request->hari;
+        $kode_jam_kerja = $request->kode_jam_kerja;
+
+        for ($i=0; $i < count($hari); $i++) { 
+            $data[] = [
+                'nik' => $nik,
+                'hari' => $hari[$i],
+                'kode_jam_kerja' => $kode_jam_kerja[$i],
+            ];
+        }
+        try {
+            KonfigurasiJamKerja::insert($data);
+            return redirect('/karyawan')->with(['success' => 'Jam Kerja Pegawai Berhasil Di Setting']);
+        } catch (\Exception $e) {
+            return redirect('/karyawan')->with(['warning' => 'Jam Kerja Pegawai Gagal Di Setting']);
+        }
+    }
+
+    public function update_set_jam_kerja(Request $request)
+    {
+        $nik = $request->nik;
+        $hari = $request->hari;
+        $kode_jam_kerja = $request->kode_jam_kerja;
+
+        for ($i=0; $i < count($hari); $i++) { 
+            $data[] = [
+                'nik' => $nik,
+                'hari' => $hari[$i],
+                'kode_jam_kerja' => $kode_jam_kerja[$i],
+            ];
+        }
+        DB::beginTransaction();
+        try {
+            DB::table('konfigurasi_jam_kerjas')->where('nik', $nik)->delete();
+            KonfigurasiJamKerja::insert($data);
+            DB::commit();
+            return redirect('/karyawan')->with(['success' => 'Jam Kerja Pegawai Berhasil Di Setting']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/karyawan')->with(['warning' => 'Jam Kerja Pegawai Gagal Di Setting']);
+        }
     }
 }
