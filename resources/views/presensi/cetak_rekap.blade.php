@@ -120,14 +120,14 @@
                     }else{
                         $hadir = explode("-",$val->$tgl);
                         $total_hadir += 1;
-                        if ($hadir[0] > "08:00:00") {
+                        if ($hadir[0] > $val->jam_masuk) {
                             $total_terlambat += 1;
                         }
                     }
                 @endphp
                 <td>
-                    <span style="color:{{ $hadir[0] > "08:00:00" ? "red" : "" }}">{{ $hadir[0] }}</span> <br>
-                    <span style="color:{{ $hadir[1] < "16:00:00" ? "red" : "" }}">{{ $hadir[1] }}</span>
+                    <span style="color:{{ $hadir[0] > $val->jam_masuk ? "red" : "" }}">{{ !empty($hadir[0]) ? $hadir[0] : '-' }}</span> <br>
+                    <span style="color:{{ $hadir[1] < $val->jam_pulang ? "red" : "" }}">{{ !empty($hadir[1]) ? $hadir[1] : '-' }}</span>
                 </td>
                 @endfor
                 <td>{{ $total_hadir }}</td>

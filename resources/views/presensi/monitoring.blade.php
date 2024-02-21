@@ -39,7 +39,8 @@
                                             <td>No.</td>
                                             <td>NIK</td>
                                             <td>Nama Karyawan</td>
-                                            <td>Departemen</td>
+                                            <td>Dept</td>
+                                            <td>Jadwal</td>
                                             <td>Jam Masuk</td>
                                             <td>Foto</td>
                                             <td>Jam Pulang</td>

@@ -23,7 +23,8 @@ class DashboardController extends Controller
             ->get();
 
         $rekap_presensi = DB::table('presensis')
-            ->selectRaw('COUNT(nik) as jmlHadir, SUM(IF(time_in > "07:00",1,0)) as jmlTerlambat')
+            ->selectRaw('COUNT(nik) as jmlHadir, SUM(IF(time_in > jam_masuk ,1,0)) as jmlTerlambat')
+            ->leftJoin('jam_kerjas','presensis.kode_jam_kerja','=','jam_kerjas.kode_jam_kerja')
             ->where('nik', $nik)
             ->whereRaw('MONTH(tanggal_presensi)="'.$month_now.'"')
             ->whereRaw('YEAR(tanggal_presensi)="'.$year_now.'"')

@@ -23,7 +23,8 @@
     <td>{{ $loop->iteration }}</td>
     <td>{{ $val->nik }}</td>
     <td>{{ $val->nama_lengkap }}</td>
-    <td>{{ $val->dept_name }}</td>
+    <td>{{ $val->dept_code }}</td>
+    <td>{{ $val->nama_jam_kerja }} ({{ $val->jam_masuk }} s/d {{ $val->jam_pulang }})</td>
     <td>{{ $val->time_in }}</td>
     <td><img src="{{ url($foto_in) }}" class="avatar" alt=""></td>
     <td>{!! $val->time_out != null ? $val->time_out : '<span class="badge text-white bg-danger">Belum Absen</span>' !!}</td>
@@ -35,9 +36,9 @@
         @endif
     </td>
     <td>
-        @if ($val->time_in >= '08:00')
+        @if ($val->time_in >= $val->jam_masuk)
         @php
-            $jam_terlambat = selisih('08:00:00', $val->time_in);
+            $jam_terlambat = selisih($val->jam_masuk, $val->time_in);
         @endphp
             <span class="badge text-white bg-danger">Terlambat {{ $jam_terlambat }}</span>
         @else
