@@ -12,7 +12,7 @@ class Karyawan extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $primaryKey = 'nik';
-
+    public $incrementing = false; //digunakan untuk menonaktifkan increment di database agar bisa menampilkan id yang menyimpan nilai string
     protected $fillable = [
         'nik',
         'nama_lengkap',

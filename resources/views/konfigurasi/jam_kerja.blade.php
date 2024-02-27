@@ -198,6 +198,7 @@
 @push('myscript')
     <script>
         $(function(){
+            $('#awal_jam_masuk, #jam_masuk, #akhir_jam_masuk, #jam_pulang').mask("00:00");
             $('#btnAddWorkingHours').click(function(){
                 $('#modal-addworkinghours').modal('show');
             });

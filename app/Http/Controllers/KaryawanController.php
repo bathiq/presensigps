@@ -69,6 +69,10 @@ class KaryawanController extends Controller
             // dd($e);
             if ($e->getCode() == 23000) {
                 $message = "Data dengan NIK " . $nik . " Sudah Ada!";
+            }else if ($e->getCode() == 22001) {
+                $message = "Jumlah Karakter NIK Lebih dari 5 Digit";
+            }else{
+                $message = "Hubungi Tim IT";
             }
             return Redirect::Back()->with(['warning' => 'Data Gagal Disimpan, ' . $message]);
         }

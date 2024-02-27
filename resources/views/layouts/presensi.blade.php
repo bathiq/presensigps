@@ -17,6 +17,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/icon/192x192.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="manifest" href="__manifest.json">
+
+    <style>
+        .history_detail{
+            display: flex;
+        }
+        .data_presensi{
+            margin-left: 10px;
+            line-height: 5px;
+        }
+    </style>
 </head>
 
 <body style="background-color:#e9ecef;">

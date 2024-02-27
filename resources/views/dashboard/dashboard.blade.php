@@ -197,7 +197,7 @@
         </div>
         <div class="tab-content mt-2" style="margin-bottom:100px;">
             <div class="tab-pane fade show active" id="home" role="tabpanel">
-                <ul class="listview image-listview">
+                {{-- <ul class="listview image-listview">
                     @foreach ($history_month_now as $var)
                     <li>
                         <div class="item">
@@ -212,7 +212,49 @@
                         </div>
                     </li>
                     @endforeach
-                </ul>
+                </ul> --}}
+                @foreach ($history_month_now as $val)
+                    <div class="card historicard mb-1">
+                        <div class="card-body">
+                            <div class="history_content">
+                                <div class="history_detail">
+                                    <div class="icon_presensi">
+                                        <ion-icon name="finger-print-outline" style="font-size: 48px;" class="text-success"></ion-icon>
+                                    </div>
+                                    <div class="data_presensi">
+                                        <h3 style="line-height: 2px;">{{ $val->nama_jam_kerja }}</h3>
+                                        <h4>{{ DateToIndo2($val->tanggal_presensi) }}</h4>
+                                        <span>
+                                            {!! $val->time_in != null ? date('H:i', strtotime($val->time_in)) : '<span class="text-danger">Belum Absen</span>' !!}
+                                            {!! $val->time_out != null ? "-". date('H:i', strtotime($val->time_out)) : '<span class="text-danger">- Belum Absen</span>' !!}
+                                        </span>
+                                        <div id="keterangan" class="mt-2">
+                                            @php
+                                            //Jam Ketika dia Absen
+                                            $jam_in = date("H:i", strtotime($val->time_in));
+                                            
+                                            //Jam Jadwal Masuk
+                                            $jam_masuk = date("H:i", strtotime($val->jam_masuk));
+
+                                            $jadwal_jam_masuk = $val->tanggal_presensi." ".$jam_masuk;
+                                            $jam_presensi = $val->tanggal_presensi." ".$jam_in;
+                                            @endphp
+                                            @if ($jam_in > $jam_masuk)
+                                            @php
+                                            $jmlterlambat = hitungjamterlambat($jadwal_jam_masuk, $jam_presensi);
+                                            $jmlterlambatdesimal = hitungjamterlambatdesimal($jadwal_jam_masuk, $jam_presensi);
+                                            @endphp
+                                            <span class="text-danger">Terlambat {{ $jmlterlambat }} ({{$jmlterlambatdesimal}} Jam)</span>
+                                            @else
+                                            <span class="text-success">Tepat Waktu</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel">
                 <ul class="listview image-listview">

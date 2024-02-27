@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $nik = Auth::guard('karyawan')->user()->nik;
         $presensi_now = DB::table('presensis')->where('tanggal_presensi', $now)->where('nik', $nik)->first();
         $history_month_now = DB::table('presensis')
+            ->leftJoin('jam_kerjas','presensis.kode_jam_kerja','=','jam_kerjas.kode_jam_kerja')
             ->where('nik', $nik)
             ->whereRaw('MONTH(tanggal_presensi)="'.$month_now.'"')
             ->whereRaw('YEAR(tanggal_presensi)="'.$year_now.'"')
